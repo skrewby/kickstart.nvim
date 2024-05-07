@@ -170,11 +170,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Jump to marks with arrow plugin
-vim.keymap.set('n', 'H', '<cmd>Arrow prev_buffer_bookmark<CR>', { desc = 'Jump to previous mark in current buffer' })
-vim.keymap.set('n', 'L', '<cmd>Arrow next_buffer_bookmark<CR>', { desc = 'Jump to next mark in current buffer' })
-vim.keymap.set('n', '<C-s>', '<cmd>Arrow toggle_current_line_for_buffer<CR>', { desc = 'Mark the current line' })
-
 -- Exit insert mode with jj
 vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Exit insert mode' })
 
@@ -806,6 +801,24 @@ require('lazy').setup({
       show_icons = true,
       leader_key = ';', -- Recommended to be a single key
       buffer_leader_key = 'm', -- Per Buffer Mappings
+    },
+    config = function()
+      vim.keymap.set('n', 'H', '<cmd>Arrow prev_buffer_bookmark<CR>', { desc = 'Jump to previous mark in current buffer' })
+      vim.keymap.set('n', 'L', '<cmd>Arrow next_buffer_bookmark<CR>', { desc = 'Jump to next mark in current buffer' })
+      vim.keymap.set('n', '<C-s>', '<cmd>Arrow toggle_current_line_for_buffer<CR>', { desc = 'Mark the current line' })
+      require('arrow').setup {}
+    end,
+  },
+
+  {
+    'hedyhli/outline.nvim',
+    lazy = true,
+    cmd = { 'Outline', 'OutlineOpen' },
+    keys = { -- Example mapping to toggle outline
+      { '<leader>o', '<cmd>Outline<CR>', desc = 'Toggle outline' },
+    },
+    opts = {
+      -- Your setup opts here
     },
   },
 
