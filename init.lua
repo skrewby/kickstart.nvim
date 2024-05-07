@@ -102,6 +102,11 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Change number tab length
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -599,6 +604,14 @@ require('lazy').setup({
     end,
   },
 
+  { -- Work with surrounds
+    'tpope/vim-surround',
+  },
+
+  { -- Add repeat functionality to plugins
+    'tpope/vim-repeat',
+  },
+
   { -- Autoformat
     'stevearc/conform.nvim',
     lazy = false,
@@ -778,7 +791,7 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
