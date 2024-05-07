@@ -170,6 +170,11 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Jump to marks with arrow plugin
+vim.keymap.set('n', 'H', '<cmd>Arrow prev_buffer_bookmark<CR>', { desc = 'Jump to previous mark in current buffer' })
+vim.keymap.set('n', 'L', '<cmd>Arrow next_buffer_bookmark<CR>', { desc = 'Jump to next mark in current buffer' })
+vim.keymap.set('n', '<C-s>', '<cmd>Arrow toggle_current_line_for_buffer<CR>', { desc = 'Mark the current line' })
+
 -- Exit insert mode with jj
 vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Exit insert mode' })
 
@@ -775,6 +780,16 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
+  -- Bookmark files and better marks
+  {
+    'otavioschwanck/arrow.nvim',
+    opts = {
+      show_icons = true,
+      leader_key = ';', -- Recommended to be a single key
+      buffer_leader_key = 'm', -- Per Buffer Mappings
+    },
+  },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -810,6 +825,10 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+
+      require('mini.bracketed').setup()
+
+      require('mini.comment').setup()
     end,
   },
 
